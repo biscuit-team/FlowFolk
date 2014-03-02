@@ -22,7 +22,7 @@ public class PipeInterpreterTest extends TestCase {
 
 		System.out
 				.println(Arrays.toString(interpreter.getVariable("listUrls")));
-		System.out
-				.println(Arrays.toString(interpreter.getVariable("jsonBodys")));
+//		System.out
+//				.println(Arrays.toString(interpreter.getVariable("jsonBodys")));
 	}
 }

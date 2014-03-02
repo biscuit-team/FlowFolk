@@ -1,28 +1,29 @@
 package cn.sotou.grabber.pipe.interpreter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.io.IOUtils;
-
-import cn.sotou.grabber.pipe.exception.PipeUtilException;
 import cn.sotou.grabber.pipe.util.PipeConstant;
 import cn.sotou.grabber.pipe.util.PipeSupport;
+import org.apache.commons.io.IOUtils;
+
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class PipeInterpreter extends PipeSupport {
 
-	private ReferenceReplacer referenceReplacer = new ReferenceReplacer();
+	private boolean multiThreads = false;
+
+	private int maxThreadNum = 5;
+
+	private VariableDereferencer dereferencer = new VariableDereferencer();
 
 	private PipeCommandBuilder pipeCommandBuilder = new PipeCommandBuilder();
 
-	private Map<String, String[]> varMap = new HashMap<String, String[]>();
+	//private Map<String, String[]> varMap = new HashMap<String, String[]>();
 
-	public void evaluate(String script) throws PipeUtilException, Exception {
+	private VariableStorage variableStorage = new VariableStorage();
+
+	public void evaluate(String script) throws Exception {
 
 		String[] scriptLines = script.split("\n");
 
@@ -30,25 +31,23 @@ public class PipeInterpreter extends PipeSupport {
 
 	}
 
-	public void evaluate(String[] scriptLines) throws PipeUtilException,
+	public void evaluate(String[] scriptLines) throws
 			Exception {
 		for (String string : scriptLines) {
-			if (ScriptComment.isComment(string)) {
-				continue;
-			} else {
-				evaluateLine(string, varMap);
+			if (!ScriptComment.isComment(string)) {
+				evaluateLine(string, variableStorage);
 			}
 		}
 	}
 
-	private void evaluateLine(String scriptLine, Map<String, String[]> varMap)
-			throws PipeUtilException, Exception {
-		String dereferencedScriptLine = referenceReplacer.replace(scriptLine,
-				varMap);
+	private void evaluateLine(String scriptLine, VariableStorage variableStorage)
+			throws Exception {
+		String dereferencedScriptLine = dereferencer.dereference(scriptLine,
+				variableStorage);
 		ScriptSentence sentence = new ScriptSentence(dereferencedScriptLine);
 
-		InputStream inputs[] = getStartStreams(sentence.getStartVar(), varMap);
-		
+		InputStream inputs[] = getStartStreams(sentence.getStartVar(), variableStorage);
+
 		for (String pipeCmd : sentence.getPipeUtilCmdChain()) {
 
 			List<InputStream> results = new LinkedList<InputStream>();
@@ -63,42 +62,21 @@ public class PipeInterpreter extends PipeSupport {
 			inputs = results.toArray(new InputStream[results.size()]);
 
 		}
-		addVarToMap(sentence.getLeftVar(), inputs, varMap);
+		variableStorage.addStreamsAsVariable(sentence.getLeftVar(), inputs);
 	}
 
 	private InputStream[] getStartStreams(String startName,
-			Map<String, String[]> varMap) {
+	                                      VariableStorage variableStorage) {
 		if (startName.startsWith(PipeConstant.REF_CHAR)) {
-			String[] inputStrings = varMap.get(startName.substring(1));
-			InputStream[] inputStreams = new InputStream[inputStrings.length];
-
-			for (int i = 0; i < inputStreams.length; i++) {
-				inputStreams[i] = IOUtils.toInputStream(inputStrings[i]);
-
-			}
-
-			return inputStreams;
+			return variableStorage.getVariableAsSteams(startName);
 		} else {
-			return new InputStream[] { IOUtils.toInputStream(startName) };
+			return new InputStream[]{IOUtils.toInputStream(startName)};
 		}
 	}
 
-	private void addVarToMap(String leftName, InputStream[] inputStreams,
-			Map<String, String[]> varMap) throws IOException {
-
-		String[] inputStrings = new String[inputStreams.length];
-		for (int i = 0; i < inputStrings.length; i++) {
-			inputStrings[i] = IOUtils.toString(inputStreams[i]);
-			IOUtils.closeQuietly(inputStreams[i]);
-		}
-		varMap.put(leftName, inputStrings);
-	}
 
 	public String[] getVariable(String name) {
-		return varMap.get(name);
+		return variableStorage.getVariablesAsMap().get(name);
 	}
 
-	public Map<String, String[]> getResult() {
-		return varMap;
-	}
 }

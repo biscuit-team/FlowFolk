@@ -1,4 +1,4 @@
-package cn.sotou.flowfolk.provider;
+package cn.sotou.flowfolk.util.provider;
 
 import cn.sotou.flowfolk.util.PipeUtil;
 

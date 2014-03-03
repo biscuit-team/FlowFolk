@@ -4,18 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="interpreterConfig" class="cn.sotou.flowfolk.interpreter.InterpreterConfig">
-		<property name="multiThreads">
-			<value>true</value>
-		</property>
-		<property name="maxThreadNum">
-			<value>5</value>
-		</property>
-	</bean>
+    <bean id="interpreterConfig" class="cn.sotou.flowfolk.interpreter.InterpreterConfig">
+        <property name="multiThreads">
+            <value>false</value>
+        </property>
+        <property name="maxThreadNum">
+            <value>10</value>
+        </property>
+    </bean>
 
-	<bean id="pipeInterpreter" class="cn.sotou.flowfolk.interpreter.PipeInterpreter">
-		<property name="config">
-			<ref bean="interpreterConfig"></ref>
-		</property>
-	</bean>
+    <bean id="pipeInterpreter" class="cn.sotou.flowfolk.interpreter.PipeInterpreter">
+        <property name="config">
+            <ref bean="interpreterConfig"></ref>
+        </property>
+    </bean>
 </beans>

@@ -1,4 +1,4 @@
-package cn.sotou.flowfolk.provider;
+package cn.sotou.flowfolk.util.provider;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +11,7 @@ public class PipeUtilProvider {
 
 	public PipeUtilProvider() {
 		providers.add(new BuiltinUtilProvider());
+		providers.add(new GroovyUtilProvider());
 	}
 
 	public PipeUtil get(String name) {

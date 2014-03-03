@@ -4,7 +4,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import cn.sotou.flowfolk.exception.NoPipeUtilFoundException;
 import cn.sotou.flowfolk.exception.ScriptGrammarException;
-import cn.sotou.flowfolk.provider.PipeUtilProvider;
+import cn.sotou.flowfolk.util.provider.PipeUtilProvider;
 import cn.sotou.flowfolk.util.PipeUtil;
 
 public class PipeCommandBuilder {
@@ -15,7 +15,7 @@ public class PipeCommandBuilder {
 
 	public PipeCommand build(String cmdString) throws ScriptGrammarException,
 			NoPipeUtilFoundException {
-		String args[] = cmdString.split(ARGS_SPLIT);
+		String args[] = splitArguments(cmdString);
 
 		if (args.length > 0) {
 			PipeUtil util = pipeUtilProvider.get(args[0]);
@@ -29,6 +29,11 @@ public class PipeCommandBuilder {
 			throw new ScriptGrammarException(cmdString);
 		}
 
+	}
+
+	private String[] splitArguments(String cmdString) {
+		//TODO support escape blank characters and quotation
+		return cmdString.split(ARGS_SPLIT);
 	}
 
 }

@@ -1,4 +1,4 @@
-package cn.sotou.flowfolk.provider;
+package cn.sotou.flowfolk.util.provider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,6 @@ public class BuiltinUtilProvider implements IUtilProvider {
 				}
 				return util;
 			} catch (NoPipeUtilFoundException e) {
-				e.printStackTrace();
 				return null;
 			}
 		}

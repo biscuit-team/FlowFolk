@@ -1,8 +1,9 @@
 package cn.sotou.flowfolk.interpreter;
 
-import cn.sotou.flowfolk.interpreter.task.StreamsProcessor;
+import cn.sotou.flowfolk.interpreter.task.IStreamsProcessor;
+import cn.sotou.flowfolk.interpreter.task.SimpleStreamsProcessor;
+import cn.sotou.flowfolk.interpreter.task.ThreadStreamsProcessor;
 import cn.sotou.flowfolk.util.PipeConstant;
-import cn.sotou.flowfolk.util.PipeSupport;
 import org.apache.commons.io.IOUtils;
 
 import java.io.InputStream;
@@ -20,11 +21,17 @@ public class PipeInterpreter extends PipeSupport {
 
 	private VariableStorage variableStorage = new VariableStorage();
 
-	private StreamsProcessor streamsProcessor;
+	private IStreamsProcessor streamsProcessor;
 
 	public void evaluate(String script) throws Exception {
 
 		String[] scriptLines = script.split("\n");
+
+		if (config.getMultiThreads()) {
+			this.streamsProcessor = new ThreadStreamsProcessor(config.getMaxThreadNum());
+		} else {
+			this.streamsProcessor = new SimpleStreamsProcessor();
+		}
 
 		evaluate(scriptLines);
 
@@ -32,21 +39,16 @@ public class PipeInterpreter extends PipeSupport {
 
 	public void evaluate(String[] scriptLines) throws
 			Exception {
-		streamsProcessor = new StreamsProcessor(config.getMaxThreadNum());
+
 		for (String string : scriptLines) {
 			if (!ScriptComment.isComment(string)) {
-				if (config.getMultiThreads()) {
-					evaluateLineWithMultiThread(string, variableStorage);
-				} else {
-					evaluateLine(string, variableStorage);
-				}
-
+				evaluateLine(string, variableStorage);
 			}
 		}
 	}
 
-	private void evaluateLine(String scriptLine, VariableStorage variableStorage)
-			throws Exception {
+
+	private void evaluateLine(String scriptLine, VariableStorage variableStorage) throws Exception {
 		String dereferencedScriptLine = dereferencer.dereference(scriptLine,
 				variableStorage);
 		ScriptSentence sentence = new ScriptSentence(dereferencedScriptLine);
@@ -55,35 +57,9 @@ public class PipeInterpreter extends PipeSupport {
 
 		for (String pipeCmd : sentence.getPipeUtilCmdChain()) {
 
-			List<InputStream> results = new LinkedList<InputStream>();
 			PipeCommand command = pipeCommandBuilder.build(pipeCmd);
 
-			for (InputStream inputStream : inputs) {
-				InputStream[] aResultInputs = command.execute(inputStream);
-				results.addAll(Arrays.asList(aResultInputs));
-				IOUtils.closeQuietly(inputStream);
-			}
-
-			inputs = results.toArray(new InputStream[results.size()]);
-
-		}
-		variableStorage.addStreamsAsVariable(sentence.getLeftVar(), inputs);
-	}
-
-	private void evaluateLineWithMultiThread(String scriptLine, VariableStorage variableStorage) throws Exception {
-		String dereferencedScriptLine = dereferencer.dereference(scriptLine,
-				variableStorage);
-		ScriptSentence sentence = new ScriptSentence(dereferencedScriptLine);
-
-		InputStream inputs[] = getStartStreams(sentence.getStartVar(), variableStorage);
-
-		for (String pipeCmd : sentence.getPipeUtilCmdChain()) {
-
-			List<InputStream> results = new LinkedList<InputStream>();
-			PipeCommand command = pipeCommandBuilder.build(pipeCmd);
-
-
-			inputs = streamsProcessor.process(inputs,command);
+			inputs = streamsProcessor.process(inputs, command);
 
 		}
 		variableStorage.addStreamsAsVariable(sentence.getLeftVar(), inputs);

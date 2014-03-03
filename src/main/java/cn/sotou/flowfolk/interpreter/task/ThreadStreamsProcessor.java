@@ -16,11 +16,11 @@ import java.util.concurrent.*;
  * Time: 上午10:39
  * To change this template use File | Settings | File Templates.
  */
-public class StreamsProcessor {
+public class ThreadStreamsProcessor implements IStreamsProcessor {
 
 	private int maxThreadNum;
 
-	public StreamsProcessor(int maxThreadNum) {
+	public ThreadStreamsProcessor(int maxThreadNum) {
 		this.maxThreadNum = maxThreadNum;
 	}
 

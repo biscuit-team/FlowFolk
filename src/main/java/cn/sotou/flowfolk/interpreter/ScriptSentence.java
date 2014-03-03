@@ -1,5 +1,6 @@
 package cn.sotou.flowfolk.interpreter;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -22,14 +23,12 @@ public class ScriptSentence {
 		Matcher matcher = LEFT_VAR_PATTERN.matcher(script);
 		if (matcher.matches()) {
 			setLeftVar(matcher.group(1));
-			String pipeExpresion = matcher.group(2);
-			String pipeUtils[] = pipeExpresion
+			String pipeExpression = matcher.group(2);
+			String pipeUtils[] = pipeExpression
 					.split(PipeConstant.PIPE_OPERATOR);
 			if (pipeUtils.length > 0) {
 				setStartVar(pipeUtils[0]);
-				for (int i = 1; i < pipeUtils.length; i++) {
-					pipeUtilCmdChain.add(pipeUtils[i]);
-				}
+				pipeUtilCmdChain.addAll(Arrays.asList(pipeUtils).subList(1, pipeUtils.length));
 			} else {
 				throw new ScriptGrammarException(script);
 			}

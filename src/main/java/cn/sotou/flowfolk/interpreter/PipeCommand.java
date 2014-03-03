@@ -8,6 +8,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import cn.sotou.flowfolk.exception.PipeUtilException;
 import cn.sotou.flowfolk.util.PipeUtil;
+import org.apache.commons.lang.StringUtils;
 
 public class PipeCommand {
 
@@ -58,5 +59,10 @@ public class PipeCommand {
 
 	public void setArgs(String[] args) {
 		this.args = args;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s %s", this.util.getClass().getSimpleName(), StringUtils.join(this.args), ' ');
 	}
 }

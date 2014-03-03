@@ -3,6 +3,7 @@ package cn.sotou.flowfolk.util.builtin;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -12,6 +13,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import cn.sotou.flowfolk.exception.PipeUtilException;
 import cn.sotou.flowfolk.util.BasePipeUtil;
+import org.apache.http.util.EntityUtils;
 
 /**
  * 
@@ -34,7 +36,11 @@ public class Get extends BasePipeUtil {
 		try {
 			HttpResponse response = getHttpClient().execute(httpGet);
 			HttpEntity entity = response.getEntity();
-			return new InputStream[] { entity.getContent() };
+
+			String responseString = IOUtils.toString(entity.getContent());
+			EntityUtils.consume(entity);
+
+			return new InputStream[] { IOUtils.toInputStream(responseString) };
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 			throw new PipeUtilException("catch an exception when try get "

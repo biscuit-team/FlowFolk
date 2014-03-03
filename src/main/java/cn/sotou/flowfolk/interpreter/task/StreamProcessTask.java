@@ -2,6 +2,7 @@ package cn.sotou.flowfolk.interpreter.task;
 
 import cn.sotou.flowfolk.interpreter.PipeCommand;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 
@@ -13,6 +14,8 @@ import java.io.InputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class StreamProcessTask implements Runnable {
+
+	private static Logger logger = Logger.getLogger(StreamProcessTask.class);
 
 	private InputStream input;
 
@@ -28,8 +31,11 @@ public class StreamProcessTask implements Runnable {
 	@Override
 	public void run() {
 		try {
+
+			logger.info(String.format("task start run : %s", command.toString()));
 			outputs = command.execute(input);
 			IOUtils.closeQuietly(input);
+			logger.info(String.format("task done : %s", command));
 		} catch (Exception e) {
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}

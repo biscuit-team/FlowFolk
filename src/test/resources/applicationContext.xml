@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="interpreterConfig" class="cn.sotou.flowfolk.interpreter.InterpreterConfig">
+		<property name="multiThreads">
+			<value>true</value>
+		</property>
+		<property name="maxThreadNum">
+			<value>5</value>
+		</property>
+	</bean>
+
+	<bean id="pipeInterpreter" class="cn.sotou.flowfolk.interpreter.PipeInterpreter">
+		<property name="config">
+			<ref bean="interpreterConfig"></ref>
+		</property>
+	</bean>
+</beans>

@@ -12,8 +12,6 @@ public class PipeInterpreterTest extends TestCase {
 
 	public void testEvaluateString() throws Exception {
 
-		System.out.println(this.getClass().getResource("/"));
-
 		String script = IOUtils.toString(PipeInterpreterTest.class.getResourceAsStream(TEST_FILE_PATH));
 		PipeInterpreter interpreter = new PipeInterpreterFactory().getPipeInterpreter();
 		interpreter.evaluate(script);

@@ -1,5 +1,7 @@
 package cn.sotou.flowfolk.interpreter;
 
+import cn.sotou.flowfolk.util.provider.PipeUtilProvider;
+
 /**
  * Created with IntelliJ IDEA.
  * User: shigong
@@ -12,6 +14,8 @@ public class InterpreterConfig {
 	private boolean multiThreads = false;
 
 	private int maxThreadNum = 5;
+
+	private PipeUtilProvider utilProvider;
 
 	public boolean getMultiThreads() {
 		return multiThreads;
@@ -27,5 +31,13 @@ public class InterpreterConfig {
 
 	public void setMaxThreadNum(int maxThreadNum) {
 		this.maxThreadNum = maxThreadNum;
+	}
+
+	public PipeUtilProvider getUtilProvider() {
+		return utilProvider;
+	}
+
+	public void setUtilProvider(PipeUtilProvider utilProvider) {
+		this.utilProvider = utilProvider;
 	}
 }

@@ -11,7 +11,6 @@ public class PipeUtilProvider {
 
 	public PipeUtilProvider() {
 		providers.add(new BuiltinUtilProvider());
-		providers.add(new GroovyUtilProvider());
 	}
 
 	public PipeUtil get(String name) {
@@ -22,5 +21,9 @@ public class PipeUtilProvider {
 			}
 		}
 		return null;
+	}
+
+	public void setUtilProviders(List<IUtilProvider> providers) {
+		this.providers = providers;
 	}
 }

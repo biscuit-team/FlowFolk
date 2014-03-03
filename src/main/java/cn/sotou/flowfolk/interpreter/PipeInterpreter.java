@@ -4,6 +4,7 @@ import cn.sotou.flowfolk.interpreter.task.IStreamsProcessor;
 import cn.sotou.flowfolk.interpreter.task.SimpleStreamsProcessor;
 import cn.sotou.flowfolk.interpreter.task.ThreadStreamsProcessor;
 import cn.sotou.flowfolk.util.PipeConstant;
+import cn.sotou.flowfolk.util.provider.PipeUtilProvider;
 import org.apache.commons.io.IOUtils;
 
 import java.io.InputStream;
@@ -17,21 +18,28 @@ public class PipeInterpreter extends PipeSupport {
 
 	private VariableDereferencer dereferencer = new VariableDereferencer();
 
-	private PipeCommandBuilder pipeCommandBuilder = new PipeCommandBuilder();
+	private PipeCommandBuilder pipeCommandBuilder;
 
 	private VariableStorage variableStorage = new VariableStorage();
 
 	private IStreamsProcessor streamsProcessor;
 
-	public void evaluate(String script) throws Exception {
-
-		String[] scriptLines = script.split("\n");
-
+	public void init() {
 		if (config.getMultiThreads()) {
 			this.streamsProcessor = new ThreadStreamsProcessor(config.getMaxThreadNum());
 		} else {
 			this.streamsProcessor = new SimpleStreamsProcessor();
 		}
+		if (config.getUtilProvider() != null) {
+			pipeCommandBuilder = new PipeCommandBuilder(config.getUtilProvider());
+		} else {
+			pipeCommandBuilder = new PipeCommandBuilder();
+		}
+	}
+
+	public void evaluate(String script) throws Exception {
+
+		String[] scriptLines = script.split("\n");
 
 		evaluate(scriptLines);
 

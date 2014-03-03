@@ -11,7 +11,15 @@ public class PipeCommandBuilder {
 
 	private final String ARGS_SPLIT = "\\s+";
 
-	private final PipeUtilProvider pipeUtilProvider = new PipeUtilProvider();
+	private PipeUtilProvider pipeUtilProvider;
+
+	public PipeCommandBuilder() {
+		pipeUtilProvider = new PipeUtilProvider();
+	}
+
+	public PipeCommandBuilder(PipeUtilProvider pipeUtilProvider) {
+		setPipeUtilProvider(pipeUtilProvider);
+	}
 
 	public PipeCommand build(String cmdString) throws ScriptGrammarException,
 			NoPipeUtilFoundException {
@@ -36,4 +44,7 @@ public class PipeCommandBuilder {
 		return cmdString.split(ARGS_SPLIT);
 	}
 
+	public void setPipeUtilProvider(PipeUtilProvider pipeUtilProvider) {
+		this.pipeUtilProvider = pipeUtilProvider;
+	}
 }

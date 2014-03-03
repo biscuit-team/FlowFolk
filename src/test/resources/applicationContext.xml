@@ -11,9 +11,19 @@
         <property name="maxThreadNum">
             <value>10</value>
         </property>
+        <property name="utilProvider">
+            <bean class="cn.sotou.flowfolk.util.provider.PipeUtilProvider">
+                <property name="utilProviders">
+                    <list>
+                        <bean class="cn.sotou.flowfolk.util.provider.BuiltinUtilProvider"></bean>
+                        <bean class="cn.sotou.flowfolk.util.provider.GroovyUtilProvider"></bean>
+                    </list>
+                </property>
+            </bean>
+        </property>
     </bean>
 
-    <bean id="pipeInterpreter" class="cn.sotou.flowfolk.interpreter.PipeInterpreter">
+    <bean id="pipeInterpreter" class="cn.sotou.flowfolk.interpreter.PipeInterpreter" init-method="init">
         <property name="config">
             <ref bean="interpreterConfig"></ref>
         </property>

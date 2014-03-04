@@ -1,12 +1,8 @@
 package cn.sotou.flowfolk.interpreter.task;
 
-import cn.sotou.flowfolk.interpreter.PipeCommand;
-import cn.sotou.flowfolk.interpreter.task.StreamProcessTask;
+import cn.sotou.flowfolk.interpreter.grammar.PipeCommand;
 
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.*;
 
 /**

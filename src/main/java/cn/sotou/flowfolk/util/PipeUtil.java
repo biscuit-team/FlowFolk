@@ -6,5 +6,5 @@ import cn.sotou.flowfolk.exception.PipeUtilException;
 
 public interface PipeUtil {
 	InputStream[] process(InputStream inputStream, String... args)
-			throws Exception;
+			throws PipeUtilException;
 }

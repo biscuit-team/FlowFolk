@@ -1,4 +1,6 @@
-package cn.sotou.flowfolk.interpreter;
+package cn.sotou.flowfolk.interpreter.grammar;
+
+import cn.sotou.flowfolk.interpreter.VariableStorage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

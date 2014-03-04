@@ -1,4 +1,4 @@
-package cn.sotou.flowfolk.interpreter;
+package cn.sotou.flowfolk.interpreter.grammar;
 
 import org.apache.commons.lang.ArrayUtils;
 
@@ -9,7 +9,7 @@ import cn.sotou.flowfolk.util.PipeUtil;
 
 public class PipeCommandBuilder {
 
-	private final String ARGS_SPLIT = "\\s+";
+	private final String ARGS_SPLIT = PipeConstant.ARGS_SPLIT;
 
 	private PipeUtilProvider pipeUtilProvider;
 
@@ -41,7 +41,7 @@ public class PipeCommandBuilder {
 
 	private String[] splitArguments(String cmdString) {
 		//TODO support escape blank characters and quotation
-		return cmdString.split(ARGS_SPLIT);
+		return EscapeUtils.decode(cmdString.split(ARGS_SPLIT));
 	}
 
 	public void setPipeUtilProvider(PipeUtilProvider pipeUtilProvider) {

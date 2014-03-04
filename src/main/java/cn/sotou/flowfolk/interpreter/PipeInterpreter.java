@@ -1,16 +1,15 @@
 package cn.sotou.flowfolk.interpreter;
 
+import cn.sotou.flowfolk.exception.PipeException;
+import cn.sotou.flowfolk.interpreter.grammar.*;
 import cn.sotou.flowfolk.interpreter.task.IStreamsProcessor;
 import cn.sotou.flowfolk.interpreter.task.SimpleStreamsProcessor;
 import cn.sotou.flowfolk.interpreter.task.ThreadStreamsProcessor;
-import cn.sotou.flowfolk.util.PipeConstant;
-import cn.sotou.flowfolk.util.provider.PipeUtilProvider;
+import cn.sotou.flowfolk.interpreter.grammar.PipeConstant;
 import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public class PipeInterpreter extends PipeSupport {
 
@@ -37,7 +36,7 @@ public class PipeInterpreter extends PipeSupport {
 		}
 	}
 
-	public void evaluate(String script) throws Exception {
+	public void evaluate(String script) throws PipeException {
 
 		String[] scriptLines = script.split("\n");
 
@@ -46,7 +45,7 @@ public class PipeInterpreter extends PipeSupport {
 	}
 
 	public void evaluate(String[] scriptLines) throws
-			Exception {
+			PipeException {
 
 		for (String string : scriptLines) {
 			if (!ScriptComment.isComment(string)) {
@@ -56,7 +55,7 @@ public class PipeInterpreter extends PipeSupport {
 	}
 
 
-	private void evaluateLine(String scriptLine, VariableStorage variableStorage) throws Exception {
+	private void evaluateLine(String scriptLine, VariableStorage variableStorage) throws PipeException {
 		String dereferencedScriptLine = dereferencer.dereference(scriptLine,
 				variableStorage);
 		ScriptSentence sentence = new ScriptSentence(dereferencedScriptLine);
@@ -70,7 +69,11 @@ public class PipeInterpreter extends PipeSupport {
 			inputs = streamsProcessor.process(inputs, command);
 
 		}
-		variableStorage.addStreamsAsVariable(sentence.getLeftVar(), inputs);
+		try {
+			variableStorage.addStreamsAsVariable(sentence.getLeftVar(), inputs);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private InputStream[] getStartStreams(String startName,

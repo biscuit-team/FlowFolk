@@ -9,7 +9,7 @@ import java.io.InputStream;
  */
 public class RegexFind extends BasePipeUtil {
 	@Override
-	public InputStream[] process(InputStream inputStream, String... args) throws Exception {
+	public InputStream[] process(InputStream inputStream, String... args) {
 		return new InputStream[0];
 	}
 }

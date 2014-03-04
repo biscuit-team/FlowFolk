@@ -16,15 +16,12 @@ public class BuiltinUtilBuilder {
 
 	public PipeUtil build(Class<? extends PipeUtil> clazz) {
 		try {
-			// TODO use groovy to initial this PipeUtil
 			PipeUtil util = clazz.newInstance();
 			assembleUtil(util);
 			return util;
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

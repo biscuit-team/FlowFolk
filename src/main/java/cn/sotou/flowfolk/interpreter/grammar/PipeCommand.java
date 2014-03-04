@@ -1,4 +1,4 @@
-package cn.sotou.flowfolk.interpreter;
+package cn.sotou.flowfolk.interpreter.grammar;
 
 import java.io.IOException;
 import java.io.InputStream;

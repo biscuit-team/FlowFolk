@@ -1,6 +1,6 @@
 package cn.sotou.flowfolk.interpreter.task;
 
-import cn.sotou.flowfolk.interpreter.PipeCommand;
+import cn.sotou.flowfolk.interpreter.grammar.PipeCommand;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 

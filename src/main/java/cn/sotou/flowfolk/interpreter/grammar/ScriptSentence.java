@@ -1,4 +1,4 @@
-package cn.sotou.flowfolk.interpreter;
+package cn.sotou.flowfolk.interpreter.grammar;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.sotou.flowfolk.exception.ScriptGrammarException;
-import cn.sotou.flowfolk.util.PipeConstant;
 
 public class ScriptSentence {
 	private String leftVar;

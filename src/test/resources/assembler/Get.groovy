@@ -1,7 +1,7 @@
 package assembler
 
-import cn.sotou.flowfolk.util.PipeUtil
-import cn.sotou.flowfolk.util.provider.IBuiltinUtilAssembler
+import cn.sotou.tuningfork.util.PipeUtil
+import cn.sotou.tuningfork.util.provider.IBuiltinUtilAssembler
 
 class GetAssembler implements IBuiltinUtilAssembler {
 

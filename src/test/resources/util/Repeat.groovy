@@ -1,6 +1,6 @@
 package util
 
-import cn.sotou.flowfolk.util.BasePipeUtil
+import cn.sotou.tuningfork.util.BasePipeUtil
 import org.apache.commons.lang.StringUtils
 
 class Repeat extends BasePipeUtil {

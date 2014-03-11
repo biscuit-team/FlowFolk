@@ -1,7 +1,6 @@
 package util
 
-import cn.sotou.flowfolk.util.BasePipeUtil
-import org.apache.commons.lang.StringUtils
+import cn.sotou.tuningfork.util.BasePipeUtil
 
 /**
  * Created by shigong on 14-3-4.

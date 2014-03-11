@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="interpreterConfig" class="cn.sotou.flowfolk.interpreter.InterpreterConfig">
+	<bean id="interpreterConfig" class="cn.sotou.tuningfork.interpreter.InterpreterConfig">
 		<property name="multiThreads">
 			<value>false</value>
 		</property>
@@ -12,19 +12,19 @@
 			<value>10</value>
 		</property>
 		<property name="utilProvider">
-			<bean class="cn.sotou.flowfolk.util.provider.PipeUtilProvider">
+			<bean class="cn.sotou.tuningfork.util.provider.PipeUtilProvider">
 				<property name="utilProviders">
 					<list>
-						<bean class="cn.sotou.flowfolk.util.provider.BuiltinUtilProvider"></bean>
-						<bean class="cn.sotou.flowfolk.util.provider.GroovyUtilProvider"></bean>
-						<bean class="cn.sotou.flowfolk.util.provider.BeanUtilProvider"></bean>
+						<bean class="cn.sotou.tuningfork.util.provider.BuiltinUtilProvider"></bean>
+						<bean class="cn.sotou.tuningfork.util.provider.GroovyUtilProvider"></bean>
+						<bean class="cn.sotou.tuningfork.util.provider.BeanUtilProvider"></bean>
 					</list>
 				</property>
 			</bean>
 		</property>
 	</bean>
 
-	<bean id="pipeInterpreter" class="cn.sotou.flowfolk.interpreter.PipeInterpreter" init-method="init">
+	<bean id="pipeInterpreter" class="cn.sotou.tuningfork.interpreter.PipeInterpreter" init-method="init">
 		<property name="config">
 			<ref bean="interpreterConfig"></ref>
 		</property>

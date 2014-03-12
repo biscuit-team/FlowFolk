@@ -25,7 +25,7 @@ class DebugTool extends BasePipeUtil {
 		String inputStr = readerFromStream(inputStream);
 		int length = inputStr.length();
 		if (length > this.maxOutputLeng) {
-			String.format("%s...%s", inputStr.substring(0, maxOutputLeng / 2), inputStr.substring(length - maxOutputLeng / 2));
+			String.format("%s...%s", inputStr.substring(0, maxOutputLeng / 2 as int), inputStr.substring(length - maxOutputLeng / 2 as int));
 		} else {
 			return inputStr;
 		}

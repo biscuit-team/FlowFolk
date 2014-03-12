@@ -12,7 +12,9 @@ class Repeat extends BasePipeUtil {
             repeatTime = Integer.parseInt(args[0]);
         }
 
-        return toInputStream(StringUtils.repeat(readerFromStream(inputStream), repeatTime));
+	    String repeated = StringUtils.repeat(readerFromStream(inputStream), repeatTime);
+
+        return wrapStreams(toInputStream(repeated));
     }
 }
 

@@ -11,17 +11,13 @@ public class PipeInterpreter extends PipeSupport {
 
 	private InterpreterConfig config;
 
-	private VariableDereferencer dereferencer = new VariableDereferencer();
+	private final VariableDereferencer dereferencer = new VariableDereferencer();
 
-	//private PipeCommandBuilder pipeCommandBuilder;
-
-	private VariableStorage variableStorage = new VariableStorage();
-
-	//private IStreamsProcessor streamsProcessor;
+	private final VariableStorage variableStorage = new VariableStorage();
 
 	private ScriptLineEvaluator lineEvaluator;
 
-	private SentenceBuilder sentenceBuilder = new SentenceBuilder();
+	private final SentenceBuilder sentenceBuilder = new SentenceBuilder();
 
 	public void init() {
 
@@ -30,13 +26,10 @@ public class PipeInterpreter extends PipeSupport {
 			lineEvaluator = new ChianScriptLineEvaluator(config.getMaxThreadNum());
 		} else {
 			IStreamsProcessor streamsProcessor;
-			if (config.getMultiThreads()) {
-				streamsProcessor = new ThreadStreamsProcessor(config.getMaxThreadNum());
-			} else {
-				streamsProcessor = new SimpleStreamsProcessor();
-			}
-			lineEvaluator = new SimpleScriptLineEvaluator(streamsProcessor);
+			streamsProcessor = config.getMultiThreads() ? new ThreadStreamsProcessor(config.getMaxThreadNum())
+					: new SimpleStreamsProcessor();
 
+			lineEvaluator = new SimpleScriptLineEvaluator(streamsProcessor);
 		}
 
 		PipeCommandBuilder pipeCommandBuilder;
@@ -61,7 +54,7 @@ public class PipeInterpreter extends PipeSupport {
 			PipeException {
 
 		for (String string : scriptLines) {
-			if (!ScriptComment.isComment(string)) {
+			if (ScriptUtils.isExecutableScript(string)) {
 				evaluateLine(string, variableStorage);
 			}
 		}

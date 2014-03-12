@@ -8,13 +8,13 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class BuiltinUtilBuilder {
+class BuiltinUtilBuilder {
 
 	private String builtinUtilAssemblerDirectory = "/assembler";
 
 	private static final String BUILTIN_UTIL_PACKAGE = "cn.sotou.tuningfork.util.builtin";
 
-	public PipeUtil build(Class<? extends PipeUtil> clazz) {
+	PipeUtil build(Class<? extends PipeUtil> clazz) {
 		try {
 			PipeUtil util = clazz.newInstance();
 			assembleUtil(util);
@@ -74,7 +74,7 @@ public class BuiltinUtilBuilder {
 		return null;
 	}
 
-	public String getBuiltinUtilAssemblerDirectory() {
+	String getBuiltinUtilAssemblerDirectory() {
 		return builtinUtilAssemblerDirectory;
 	}
 

@@ -12,7 +12,7 @@ public class VariableDereferencer {
 
 	public String dereference(String input, VariableStorage variableStorage) {
 		Matcher matcher = REF_VAR_PATTERN.matcher(input);
-		String result = new String(input);
+		String result = input;
 		while (matcher.find()) {
 			String value = variableStorage.getVariablesAsMap().get(matcher.group(1))[0];
 			result = result.replace(matcher.group(0), value);

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class VariableStorage {
 
-	private Map<String, String[]> varMap = new HashMap<String, String[]>();
+	private final Map<String, String[]> varMap = new HashMap<String, String[]>();
 
 	public void addStreamsAsVariable(String variableName, InputStream[] inputStreams) throws IOException {
 		String[] inputStrings = new String[inputStreams.length];

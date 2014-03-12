@@ -9,23 +9,18 @@ import java.util.concurrent.Executor;
 /**
  * Created by shigong on 14-3-11.
  */
-public class ComputingNodeTree {
+class ComputingNodeTree {
 
 	private IComputingNode[] rootNodes;
 
 	private final Executor executor;
 
-	private CountLock lock = new CountLock();
+	private final CountLock lock = new CountLock();
 
-	private List<InputStream> outputs = new LinkedList<InputStream>();
-
-	public ComputingNodeTree(IComputingNode[] rootNodes, Executor executor) {
-		this.rootNodes = rootNodes;
-		this.executor = executor;
-	}
+	private final List<InputStream> outputs = new LinkedList<InputStream>();
 
 	public ComputingNodeTree(Executor executor) {
-		this(null, executor);
+		this.executor = executor;
 	}
 
 	public void execute(IComputingNode node) {

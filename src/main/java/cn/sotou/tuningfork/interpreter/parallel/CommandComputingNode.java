@@ -11,12 +11,12 @@ import java.io.InputStream;
  */
 public class CommandComputingNode implements IComputingNode {
 
-	private InputStream[] outputs;
+	//private InputStream[] outputs;
 
-	private static Logger logger = Logger.getLogger(CommandComputingNode.class);
+	private static final Logger logger = Logger.getLogger(CommandComputingNode.class);
 	private final InputStream input;
-	private CommandNode commandNode;
-	private ComputingNodeTree tree;
+	private final CommandNode commandNode;
+	private final ComputingNodeTree tree;
 
 	public CommandComputingNode(InputStream input, CommandNode commandNode, ComputingNodeTree tree) {
 		this.input = input;
@@ -29,7 +29,7 @@ public class CommandComputingNode implements IComputingNode {
 
 		CommandNode next = commandNode.getNext();
 
-		for (InputStream out : outputs) {
+		for (InputStream out : result) {
 			CommandComputingNode node = new CommandComputingNode(out, next, tree);
 			tree.execute(node);
 		}
@@ -41,7 +41,7 @@ public class CommandComputingNode implements IComputingNode {
 		if (commandNode != null) {
 			try {
 				logger.info(String.format("task start run : %s", commandNode.getCommand().toString()));
-				outputs = commandNode.getCommand().execute(input);
+				InputStream[] outputs = commandNode.getCommand().execute(input);
 				IOUtils.closeQuietly(input);
 				logger.info(String.format("task done : %s", commandNode.getCommand()));
 				this.nextNode(outputs);

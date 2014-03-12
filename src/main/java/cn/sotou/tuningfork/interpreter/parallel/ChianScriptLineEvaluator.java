@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 //use parallel computing
 public class ChianScriptLineEvaluator implements ScriptLineEvaluator {
 
-	private int maxThread;
+	private final int maxThread;
 
 	public ChianScriptLineEvaluator(int maxThread) {
 

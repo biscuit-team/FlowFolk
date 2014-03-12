@@ -19,9 +19,6 @@ public class JsonToXml extends BasePipeUtil {
 		String text = readerFromStream(input);
 		JSONObject json = new JSONObject(text);
 		String xmlStr = XML.toString(json);
-		StringBuilder builder = new StringBuilder();
-		builder.append("<?xml version=\"1.0\"?>").append("<root>")
-				.append(xmlStr).append("</root>");
-		return wrapStreams(toInputStream(builder.toString()));
+		return wrapStreams(toInputStream("<?xml version=\"1.0\"?>" + "<root>" + xmlStr + "</root>"));
 	}
 }

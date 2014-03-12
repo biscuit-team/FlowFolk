@@ -46,6 +46,6 @@ public class PipeUtilException extends PipeException {
 
 	@Override
 	public String toString() {
-		return String.format("%s, nested exception is %", getMessage(), getNestedException().getMessage());
+		return String.format("%s, nested exception is %s", getMessage(), getNestedException().getMessage());
 	}
 }

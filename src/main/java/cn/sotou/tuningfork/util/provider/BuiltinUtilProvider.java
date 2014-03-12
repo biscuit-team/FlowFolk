@@ -8,9 +8,9 @@ import cn.sotou.tuningfork.util.PipeUtil;
 
 public class BuiltinUtilProvider implements IUtilProvider {
 
-	private BuiltinUtilBuilder builtinUtilBuilder = new BuiltinUtilBuilder();
+	private final BuiltinUtilBuilder builtinUtilBuilder = new BuiltinUtilBuilder();
 
-	private Map<String, PipeUtil> utilMap = new HashMap<String, PipeUtil>();
+	private final Map<String, PipeUtil> utilMap = new HashMap<String, PipeUtil>();
 
 	public PipeUtil get(String name) {
 		PipeUtil util = utilMap.get(name);

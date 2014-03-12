@@ -14,7 +14,7 @@ import java.util.concurrent.*;
  */
 public class ThreadStreamsProcessor implements IStreamsProcessor {
 
-	private int maxThreadNum;
+	private final int maxThreadNum;
 
 	public ThreadStreamsProcessor(int maxThreadNum) {
 		this.maxThreadNum = maxThreadNum;

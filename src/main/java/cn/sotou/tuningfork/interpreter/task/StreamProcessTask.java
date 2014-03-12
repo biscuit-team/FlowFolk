@@ -15,11 +15,11 @@ import java.io.InputStream;
  */
 public class StreamProcessTask implements Runnable {
 
-	private static Logger logger = Logger.getLogger(StreamProcessTask.class);
+	private static final Logger logger = Logger.getLogger(StreamProcessTask.class);
 
-	private InputStream input;
+	private final InputStream input;
 
-	private PipeCommand command;
+	private final PipeCommand command;
 
 	private InputStream[] outputs;
 

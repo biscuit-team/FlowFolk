@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class SimpleStreamsProcessor implements IStreamsProcessor{
 
-	private static Logger logger = Logger.getLogger(SimpleStreamsProcessor.class);
+	private static final Logger logger = Logger.getLogger(SimpleStreamsProcessor.class);
 
 	@Override
 	public InputStream[] process(InputStream[] inputs, PipeCommand command) {

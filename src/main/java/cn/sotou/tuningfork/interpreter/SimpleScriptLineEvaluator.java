@@ -12,7 +12,7 @@ import java.io.InputStream;
  * Created by shigong on 14-3-11.
  */
 public class SimpleScriptLineEvaluator implements ScriptLineEvaluator {
-	private IStreamsProcessor streamsProcessor;
+	private final IStreamsProcessor streamsProcessor;
 
 	public SimpleScriptLineEvaluator(IStreamsProcessor streamsProcessor) {
 		this.streamsProcessor = streamsProcessor;

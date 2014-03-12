@@ -25,7 +25,7 @@ public class XPath extends BasePipeUtil {
 
 	public InputStream[] process(InputStream input, String... args) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder db = null;
+		DocumentBuilder db;
 		try {
 			db = dbf.newDocumentBuilder();
 			Document doc = db.parse(input);

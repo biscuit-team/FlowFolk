@@ -16,13 +16,13 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class StreamProcessTaskSet implements Iterable<StreamProcessTask> {
-	private List<StreamProcessTask> tasks;
+	private final List<StreamProcessTask> tasks;
 
 	public StreamProcessTaskSet(InputStream[] inputs, PipeCommand command) {
 		tasks = new LinkedList<StreamProcessTask>();
 
-		for (int i = 0; i < inputs.length; i++) {
-			tasks.add(new StreamProcessTask(inputs[i], command));
+		for (InputStream input : inputs) {
+			tasks.add(new StreamProcessTask(input, command));
 		}
 	}
 

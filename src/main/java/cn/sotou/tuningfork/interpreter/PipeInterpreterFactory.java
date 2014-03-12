@@ -8,9 +8,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class PipeInterpreterFactory {
 
-	private String springConfigurationFilePath;
+	private final String springConfigurationFilePath;
 
-	private ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
 
 	public PipeInterpreterFactory() {
 		springConfigurationFilePath = "applicationContext.xml";

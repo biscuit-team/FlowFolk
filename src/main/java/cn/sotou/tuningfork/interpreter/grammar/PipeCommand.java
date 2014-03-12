@@ -22,7 +22,7 @@ public class PipeCommand {
 		this.args = args;
 	}
 
-	public InputStream[] execute(InputStream input) throws PipeUtilException, Exception {
+	public InputStream[] execute(InputStream input) {
 		if (this.isRegularCmd()) {
 			return util.process(input, getArgs());
 		} else {
@@ -63,6 +63,6 @@ public class PipeCommand {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s", this.util.getClass().getSimpleName(), StringUtils.join(this.args), ' ');
+		return String.format("%s %s", this.util.getClass().getSimpleName(), StringUtils.join(this.args));
 	}
 }

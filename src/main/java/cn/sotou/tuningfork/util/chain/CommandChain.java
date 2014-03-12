@@ -14,8 +14,7 @@ public class CommandChain implements Iterable<PipeCommand> {
 	public CommandChain(PipeCommand[] cmds) {
 		CommandNode lastNode = null;
 		for (int i = cmds.length - 1; i >= 0; i--) {
-			CommandNode nowNode = new CommandNode(cmds[i], lastNode);
-			lastNode = nowNode;
+			lastNode = new CommandNode(cmds[i], lastNode);
 		}
 		firstNode = lastNode;
 	}

@@ -9,7 +9,7 @@ import cn.sotou.tuningfork.util.PipeUtil;
 
 public class PipeCommandBuilder {
 
-	private final String ARGS_SPLIT = PipeConstant.ARGS_SPLIT;
+	private static final String ARGS_SPLIT = PipeConstant.ARGS_SPLIT;
 
 	private PipeUtilProvider pipeUtilProvider;
 

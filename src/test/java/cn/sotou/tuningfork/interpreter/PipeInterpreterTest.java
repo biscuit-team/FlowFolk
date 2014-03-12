@@ -3,9 +3,6 @@ package cn.sotou.tuningfork.interpreter;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 
-import java.util.Arrays;
-import java.util.Date;
-
 public class PipeInterpreterTest extends TestCase {
 
 
@@ -62,12 +59,12 @@ public class PipeInterpreterTest extends TestCase {
 				costTime));
 
 
-		System.out.println(interpreter.getVariable("pages")[0]);
+		/*System.out.println(interpreter.getVariable("pages")[0]);
 
 		System.out
 				.println(Arrays.toString(interpreter.getVariable("listUrls")));
 		System.out
-				.println(Arrays.toString(interpreter.getVariable("jsonBodies")));
+				.println(Arrays.toString(interpreter.getVariable("jsonBodies")));*/
 
 
 	}

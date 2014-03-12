@@ -18,9 +18,9 @@
 			<bean class="cn.sotou.tuningfork.util.provider.PipeUtilProvider">
 				<property name="utilProviders">
 					<list>
-						<bean class="cn.sotou.tuningfork.util.provider.BuiltinUtilProvider"></bean>
-						<bean class="cn.sotou.tuningfork.util.provider.GroovyUtilProvider"></bean>
-						<bean class="cn.sotou.tuningfork.util.provider.BeanUtilProvider"></bean>
+						<bean class="cn.sotou.tuningfork.util.provider.BuiltinUtilProvider"/>
+						<bean class="cn.sotou.tuningfork.util.provider.GroovyUtilProvider"/>
+						<bean class="cn.sotou.tuningfork.util.provider.BeanUtilProvider"/>
 					</list>
 				</property>
 			</bean>
@@ -29,7 +29,7 @@
 
 	<bean id="pipeInterpreter" class="cn.sotou.tuningfork.interpreter.PipeInterpreter" init-method="init">
 		<property name="config">
-			<ref bean="interpreterConfig"></ref>
+			<ref bean="interpreterConfig"/>
 		</property>
 	</bean>
 </beans>

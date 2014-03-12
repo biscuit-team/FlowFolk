@@ -61,6 +61,15 @@ public class PipeInterpreterTest extends TestCase {
 		System.out.println(String.format("execute: %s reults in %s ms", name,
 				costTime));
 
+
+		System.out.println(interpreter.getVariable("pages")[0]);
+
+		System.out
+				.println(Arrays.toString(interpreter.getVariable("listUrls")));
+		System.out
+				.println(Arrays.toString(interpreter.getVariable("jsonBodies")));
+
+
 	}
 
 }

@@ -2,6 +2,7 @@ package cn.sotou.tuningfork.interpreter;
 
 import cn.sotou.tuningfork.exception.PipeException;
 import cn.sotou.tuningfork.interpreter.grammar.*;
+import cn.sotou.tuningfork.interpreter.parallel.ChianScriptLineEvaluator;
 import cn.sotou.tuningfork.interpreter.task.IStreamsProcessor;
 import cn.sotou.tuningfork.interpreter.task.SimpleStreamsProcessor;
 import cn.sotou.tuningfork.interpreter.task.ThreadStreamsProcessor;
@@ -23,19 +24,27 @@ public class PipeInterpreter extends PipeSupport {
 	private SentenceBuilder sentenceBuilder = new SentenceBuilder();
 
 	public void init() {
-		IStreamsProcessor streamsProcessor;
-		PipeCommandBuilder pipeCommandBuilder;
-		if (config.getMultiThreads()) {
-			streamsProcessor = new ThreadStreamsProcessor(config.getMaxThreadNum());
+
+
+		if (config.isChainThreads()) {
+			lineEvaluator = new ChianScriptLineEvaluator(config.getMaxThreadNum());
 		} else {
-			streamsProcessor = new SimpleStreamsProcessor();
+			IStreamsProcessor streamsProcessor;
+			if (config.getMultiThreads()) {
+				streamsProcessor = new ThreadStreamsProcessor(config.getMaxThreadNum());
+			} else {
+				streamsProcessor = new SimpleStreamsProcessor();
+			}
+			lineEvaluator = new SimpleScriptLineEvaluator(streamsProcessor);
+
 		}
+
+		PipeCommandBuilder pipeCommandBuilder;
 		if (config.getUtilProvider() != null) {
 			pipeCommandBuilder = new PipeCommandBuilder(config.getUtilProvider());
 		} else {
 			pipeCommandBuilder = new PipeCommandBuilder();
 		}
-		lineEvaluator = new SimpleScriptLineEvaluator(streamsProcessor);
 		sentenceBuilder.setPipeCommandBuilder(pipeCommandBuilder);
 		sentenceBuilder.setVariableStorage(variableStorage);
 	}

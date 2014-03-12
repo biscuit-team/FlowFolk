@@ -17,6 +17,7 @@ public class VariableStorage {
 	public void addStreamsAsVariable(String variableName, InputStream[] inputStreams) throws IOException {
 		String[] inputStrings = new String[inputStreams.length];
 		for (int i = 0; i < inputStrings.length; i++) {
+			assert inputStreams[i] != null;
 			inputStrings[i] = IOUtils.toString(inputStreams[i]);
 			IOUtils.closeQuietly(inputStreams[i]);
 		}

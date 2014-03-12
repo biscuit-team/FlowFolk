@@ -5,10 +5,10 @@ import cn.sotou.tuningfork.util.provider.IBuiltinUtilAssembler
 
 class GetAssembler implements IBuiltinUtilAssembler {
 
-    @Override
-    void assemble(PipeUtil pipeUtil) {
+	@Override
+	void assemble(PipeUtil pipeUtil) {
 
-        System.out.println("assembler.GetAssembler#assemble()");
+		//System.out.println("assembler.GetAssembler#assemble()");
 
-    }
+	}
 }

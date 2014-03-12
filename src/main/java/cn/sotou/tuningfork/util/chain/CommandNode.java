@@ -14,7 +14,7 @@ public class CommandNode {
 		this.next = next;
 	}
 
-	public PipeCommand getUtil() {
+	public PipeCommand getCommand() {
 		return cmd;
 	}
 

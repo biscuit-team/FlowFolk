@@ -11,6 +11,9 @@
 		<property name="maxThreadNum">
 			<value>10</value>
 		</property>
+		<property name="chainThreads">
+			<value>true</value>
+		</property>
 		<property name="utilProvider">
 			<bean class="cn.sotou.tuningfork.util.provider.PipeUtilProvider">
 				<property name="utilProviders">

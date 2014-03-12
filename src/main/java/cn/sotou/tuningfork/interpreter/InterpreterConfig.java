@@ -13,6 +13,8 @@ public class InterpreterConfig {
 
 	private boolean multiThreads = false;
 
+	private boolean chainThreads = false;
+
 	private int maxThreadNum = 5;
 
 	private PipeUtilProvider utilProvider;
@@ -39,5 +41,13 @@ public class InterpreterConfig {
 
 	public void setUtilProvider(PipeUtilProvider utilProvider) {
 		this.utilProvider = utilProvider;
+	}
+
+	public boolean isChainThreads() {
+		return chainThreads;
+	}
+
+	public void setChainThreads(boolean chainThreads) {
+		this.chainThreads = chainThreads;
 	}
 }

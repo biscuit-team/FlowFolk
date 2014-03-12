@@ -50,7 +50,7 @@ public class CommandChain implements Iterable<PipeCommand> {
 		@Override
 		public PipeCommand next() {
 			node = node.getNext();
-			return node.getUtil();
+			return node.getCommand();
 		}
 
 		@Override

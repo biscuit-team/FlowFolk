@@ -25,7 +25,7 @@ public class SimpleStreamsProcessor implements IStreamsProcessor{
 			try {
 				logger.info(String.format("cmd run: %s", command.toString()));
 				aResultInputs = command.execute(inputStream);
-				logger.info(String.format("cmd: %s donw", command));
+				logger.info(String.format("cmd: %s done", command));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

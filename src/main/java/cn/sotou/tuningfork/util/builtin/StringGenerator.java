@@ -19,13 +19,13 @@ public class StringGenerator extends BasePipeUtil {
 		Matcher matcher = VALIDATE_PATTERN.matcher(input);
 
 		if (matcher.find()) {
-			String entery = matcher.group(0);
+			String entry = matcher.group(0);
 			int start = Integer.parseInt(matcher.group(1));
 			int end = Integer.parseInt(matcher.group(2));
 			InputStream[] inputStreams = new InputStream[end - start + 1];
 
 			for (int i = start; i <= end; i++) {
-				inputStreams[i - start] = toInputStream(input.replaceAll(entery
+				inputStreams[i - start] = toInputStream(input.replaceAll(entry
 						.replace("{", "\\{").replaceAll("}", "\\}"), i + ""));
 			}
 			return inputStreams;

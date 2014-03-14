@@ -12,7 +12,7 @@ write a pipe script `grab.properties`
 	url=http://www.renrendai.com/lend/loanList!json.action
 	pages=@url|Get|JsonToXml|XPath root/data/totalPage/text()
 	listUrls=@(url)?pageIndex={1-2}|StringGenerator
-	jsonBodys=@listUrls|Get|JsonToXml|XPath root/data/loans/title/text()
+	jsonBodies=@listUrls|Get|JsonToXml|XPath root/data/loans/title/text()
 ```
 
 use `PipeInterpreter` to evaluate this file
@@ -27,7 +27,7 @@ use `PipeInterpreter` to evaluate this file
 	System.out
 			.println(Arrays.toString(interpreter.getVariable("listUrls")));
 	System.out
-			.println(Arrays.toString(interpreter.getVariable("jsonBodys")));
+			.println(Arrays.toString(interpreter.getVariable("jsonBodies")));
 ```
 
 a possible output：

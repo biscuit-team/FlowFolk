@@ -13,19 +13,22 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import cn.sotou.tuningfork.exception.PipeUtilException;
 import cn.sotou.tuningfork.util.BasePipeUtil;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 /**
- * 
  * @author shigong
- * 
  */
 public class Get extends BasePipeUtil {
 
 	private HttpClient httpClient;
 
+	private HttpContext context;
+
 	public Get() {
 		setHttpClient(HttpClientBuilder.create().build());
+		context = new BasicHttpContext();
 	}
 
 	public InputStream[] process(InputStream input, String... args) {
@@ -34,13 +37,13 @@ public class Get extends BasePipeUtil {
 
 		HttpGet httpGet = new HttpGet(url);
 		try {
-			HttpResponse response = getHttpClient().execute(httpGet);
+			HttpResponse response = getHttpClient().execute(httpGet, getContext());
 			HttpEntity entity = response.getEntity();
 
 			String responseString = IOUtils.toString(entity.getContent());
 			EntityUtils.consume(entity);
 
-			return new InputStream[] { IOUtils.toInputStream(responseString) };
+			return new InputStream[]{IOUtils.toInputStream(responseString)};
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 			throw new PipeUtilException("catch an exception when try get "
@@ -58,5 +61,13 @@ public class Get extends BasePipeUtil {
 
 	public void setHttpClient(HttpClient httpClient) {
 		this.httpClient = httpClient;
+	}
+
+	public HttpContext getContext() {
+		return context;
+	}
+
+	public void setContext(HttpContext context) {
+		this.context = context;
 	}
 }

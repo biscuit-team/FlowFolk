@@ -55,7 +55,7 @@ public class PipeInterpreterTest extends TestCase {
 		interpreter.evaluate(script);
 		long endTime = System.nanoTime();
 		long costTime = (endTime - beginTime) / 1000000;
-		System.out.println(String.format("execute: %s reults in %s ms", name,
+		System.out.println(String.format("execute: %s result in %s ms", name,
 				costTime));
 
 

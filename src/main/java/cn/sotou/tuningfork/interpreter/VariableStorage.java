@@ -4,15 +4,15 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by gongshw on 14-3-2.
  */
 public class VariableStorage {
 
-	private final Map<String, String[]> varMap = new HashMap<String, String[]>();
+	private final Map<String, String[]> varMap = new ConcurrentHashMap<String, String[]>();
 
 	public void addStreamsAsVariable(String variableName, InputStream[] inputStreams) throws IOException {
 		String[] inputStrings = new String[inputStreams.length];

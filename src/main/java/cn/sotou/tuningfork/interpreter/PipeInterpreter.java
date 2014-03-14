@@ -2,7 +2,7 @@ package cn.sotou.tuningfork.interpreter;
 
 import cn.sotou.tuningfork.exception.PipeException;
 import cn.sotou.tuningfork.interpreter.grammar.*;
-import cn.sotou.tuningfork.interpreter.parallel.ChianScriptLineEvaluator;
+import cn.sotou.tuningfork.interpreter.parallel.ChainScriptLineEvaluator;
 import cn.sotou.tuningfork.interpreter.task.IStreamsProcessor;
 import cn.sotou.tuningfork.interpreter.task.SimpleStreamsProcessor;
 import cn.sotou.tuningfork.interpreter.task.ThreadStreamsProcessor;
@@ -23,7 +23,7 @@ public class PipeInterpreter extends PipeSupport {
 
 
 		if (config.isChainThreads()) {
-			lineEvaluator = new ChianScriptLineEvaluator(config.getMaxThreadNum());
+			lineEvaluator = new ChainScriptLineEvaluator(config.getMaxThreadNum());
 		} else {
 			IStreamsProcessor streamsProcessor;
 			streamsProcessor = config.getMultiThreads() ? new ThreadStreamsProcessor(config.getMaxThreadNum())

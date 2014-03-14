@@ -14,11 +14,11 @@ import java.util.concurrent.Executors;
  */
 //balance performance and memory usage
 //use parallel computing
-public class ChianScriptLineEvaluator implements ScriptLineEvaluator {
+public class ChainScriptLineEvaluator implements ScriptLineEvaluator {
 
 	private final int maxThread;
 
-	public ChianScriptLineEvaluator(int maxThread) {
+	public ChainScriptLineEvaluator(int maxThread) {
 
 		this.maxThread = maxThread;
 	}

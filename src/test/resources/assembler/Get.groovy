@@ -5,6 +5,7 @@ import cn.sotou.tuningfork.util.builtin.Get
 import cn.sotou.tuningfork.util.provider.IBuiltinUtilAssembler
 import org.apache.http.impl.client.BasicCookieStore
 import org.apache.http.protocol.HttpContext
+import org.apache.http.client.CookieStore
 
 class GetAssembler implements IBuiltinUtilAssembler {
 
